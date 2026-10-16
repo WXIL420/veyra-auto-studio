@@ -1,26 +1,113 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-ink: #0d0f10;
+  --color-graphite: #191c1e;
+  --color-graphite-2: #22262a;
+  --color-line: #2c3134;
+  --color-bone: #f3f1eb;
+  --color-silver: #a8adb0;
+  --color-copper: #c87343;
+  --color-copper-2: #e08c5a;
+  --color-sage: #738d76;
+  --color-sage-2: #93ad96;
+  --color-danger: #e5826b;
+  --font-display: var(--font-barlow), "Arial Narrow", sans-serif;
+  --font-sans: var(--font-outfit), system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+  background: #0d0f10;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #0d0f10;
+  color: #f3f1eb;
+  font-family: var(--font-sans);
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: #c87343;
+  color: #0d0f10;
+}
+
+:focus-visible {
+  outline: 2px solid #e08c5a;
+  outline-offset: 3px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  font-weight: 600;
+}
+
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+@keyframes sweep {
+  0%,
+  15% {
+    transform: translateX(-260px) skewX(-24deg);
+  }
+  60%,
+  100% {
+    transform: translateX(1100px) skewX(-24deg);
+  }
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.sweep {
+  animation: sweep 7s ease-in-out infinite;
+}
+.rise {
+  animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.rise-2 {
+  animation-delay: 0.12s;
+}
+.rise-3 {
+  animation-delay: 0.24s;
+}
+.rise-4 {
+  animation-delay: 0.36s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .sweep,
+  .rise {
+    animation: none;
+  }
+}
+
+dialog::backdrop {
+  background: rgb(13 15 16 / 0.92);
 }
