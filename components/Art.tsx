@@ -27,7 +27,23 @@ function rng(seed: number) {
 const n = (v: number) => Math.round(v * 10) / 10;
 
 /** Fine circular swirl marks, the signature of poor wash technique. */
-function Swirls({ x, y, w, h, count, seed, opacity = 0.5 }: { x: number; y: number; w: number; h: number; count: number; seed: number; opacity?: number }) {
+function Swirls({
+  x,
+  y,
+  w,
+  h,
+  count,
+  seed,
+  opacity = 0.5,
+}: {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  count: number;
+  seed: number;
+  opacity?: number;
+}) {
   const r = rng(seed);
   return (
     <g fill="none" stroke={SILVER} strokeLinecap="round" opacity={opacity}>
@@ -54,7 +70,25 @@ function Swirls({ x, y, w, h, count, seed, opacity = 0.5 }: { x: number; y: numb
   );
 }
 
-function Specks({ x, y, w, h, count, seed, fill, max = 3.2 }: { x: number; y: number; w: number; h: number; count: number; seed: number; fill: string; max?: number }) {
+function Specks({
+  x,
+  y,
+  w,
+  h,
+  count,
+  seed,
+  fill,
+  max = 3.2,
+}: {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  count: number;
+  seed: number;
+  fill: string;
+  max?: number;
+}) {
   const r = rng(seed);
   return (
     <g fill={fill}>
@@ -65,7 +99,8 @@ function Specks({ x, y, w, h, count, seed, fill, max = 3.2 }: { x: number; y: nu
   );
 }
 
-const BODY = "M90 318L90 290C90 272 100 262 122 258L270 244C320 200 380 148 470 142C540 138 590 160 640 214L780 236C850 246 900 258 918 280C926 292 926 304 920 318Z";
+const BODY =
+  "M90 318L90 290C90 272 100 262 122 258L270 244C320 200 380 148 470 142C540 138 590 160 640 214L780 236C850 246 900 258 918 280C926 292 926 304 920 318Z";
 const GLASS = "M296 242C338 204 394 168 468 162C530 160 568 176 606 214L624 238Z";
 
 /** Side-on vehicle silhouette, 1000 x 400. Front faces right. */
@@ -77,7 +112,13 @@ export function Car({ state = "after", id, tone = "#3a4045" }: { state?: ArtStat
       <circle cx={cx} cy={326} r={36} fill={after ? SILVER : "#7b7d7c"} />
       <circle cx={cx} cy={326} r={30} fill="#121416" />
       {[0, 72, 144, 216, 288].map((a) => (
-        <path key={a} d="M0 -4 L26 -9 L26 9 L0 4Z" fill={after ? BONE : "#8d8b86"} opacity={0.85} transform={`translate(${cx} 326) rotate(${a})`} />
+        <path
+          key={a}
+          d="M0 -4 L26 -9 L26 9 L0 4Z"
+          fill={after ? BONE : "#8d8b86"}
+          opacity={0.85}
+          transform={`translate(${cx} 326) rotate(${a})`}
+        />
       ))}
       <circle cx={cx} cy={326} r={7} fill={COPPER} />
     </g>
@@ -120,7 +161,7 @@ export function Car({ state = "after", id, tone = "#3a4045" }: { state?: ArtStat
 export function HeroCar() {
   const id = useId();
   return (
-    <svg viewBox="40 90 940 300" className="h-full w-full" role="img" aria-label="Illustration of a dark performance coupe in profile with a copper reflection line along the body">
+    <svg viewBox="40 90 940 300" className="h-full w-full" aria-hidden="true" focusable="false">
       <defs>
         <clipPath id={`${id}-sweep`}>
           <path d={BODY} transform="translate(0 34)" />
@@ -157,17 +198,35 @@ function Scene({ kind, state, variant }: { kind: ArtKind; state: ArtState; varia
           <rect width={800} height={600} fill={GRAPHITE} />
           <circle cx={400} cy={320} r={262} fill="#08090a" />
           <circle cx={400} cy={320} r={232} fill="none" stroke="#1e2124" strokeWidth={14} />
-          <path d="M240 200 A210 210 0 0 1 400 110" fill="none" stroke={BONE} strokeWidth={5} strokeLinecap="round" opacity={after ? 0.4 : 0.08} />
+          <path
+            d="M240 200 A210 210 0 0 1 400 110"
+            fill="none"
+            stroke={BONE}
+            strokeWidth={5}
+            strokeLinecap="round"
+            opacity={after ? 0.4 : 0.08}
+          />
           <circle cx={400} cy={320} r={190} fill={after ? SILVER : "#6f6a62"} />
           <circle cx={400} cy={320} r={170} fill="#101214" />
           <path d="M470 205 A135 135 0 0 1 535 330 L500 322 A100 100 0 0 0 456 236Z" fill={COPPER} opacity={0.9} />
           {SPOKES.map((a) => (
-            <path key={a} d="M18 -22 L166 -46 L172 -14 L172 14 L166 46 L18 22Z" fill={after ? "#d9dad7" : "#8a8479"} transform={`translate(400 320) rotate(${a + 18})`} />
+            <path
+              key={a}
+              d="M18 -22 L166 -46 L172 -14 L172 14 L166 46 L18 22Z"
+              fill={after ? "#d9dad7" : "#8a8479"}
+              transform={`translate(400 320) rotate(${a + 18})`}
+            />
           ))}
           <circle cx={400} cy={320} r={52} fill={after ? BONE : "#8a8479"} />
           <circle cx={400} cy={320} r={30} fill={COPPER} />
           {SPOKES.map((a) => (
-            <circle key={a} cx={400 + Math.cos(((a + 18) * Math.PI) / 180) * 42} cy={320 + Math.sin(((a + 18) * Math.PI) / 180) * 42} r={4} fill={INK} />
+            <circle
+              key={a}
+              cx={400 + Math.cos(((a + 18) * Math.PI) / 180) * 42}
+              cy={320 + Math.sin(((a + 18) * Math.PI) / 180) * 42}
+              r={4}
+              fill={INK}
+            />
           ))}
           {after ? (
             <path d="M300 200 L520 150 L540 170 L318 224Z" fill={BONE} opacity={0.18} />
@@ -250,8 +309,22 @@ function Scene({ kind, state, variant }: { kind: ArtKind; state: ArtState; varia
                 return (
                   <g key={i}>
                     <circle cx={n(cx)} cy={n(cy)} r={n(rad)} fill="#12161a" opacity={0.85} />
-                    <circle cx={n(cx)} cy={n(cy)} r={n(rad)} fill="none" stroke={SILVER} strokeWidth={1.2} opacity={0.7} />
-                    <circle cx={n(cx - rad * 0.3)} cy={n(cy - rad * 0.35)} r={n(rad * 0.28)} fill={BONE} opacity={0.9} />
+                    <circle
+                      cx={n(cx)}
+                      cy={n(cy)}
+                      r={n(rad)}
+                      fill="none"
+                      stroke={SILVER}
+                      strokeWidth={1.2}
+                      opacity={0.7}
+                    />
+                    <circle
+                      cx={n(cx - rad * 0.3)}
+                      cy={n(cy - rad * 0.35)}
+                      r={n(rad * 0.28)}
+                      fill={BONE}
+                      opacity={0.9}
+                    />
                   </g>
                 );
               })}
@@ -262,7 +335,18 @@ function Scene({ kind, state, variant }: { kind: ArtKind; state: ArtState; varia
               {Array.from({ length: 16 }, (_, i) => {
                 const cx = 80 + r() * 640;
                 const cy = 80 + r() * 440;
-                return <ellipse key={i} cx={n(cx)} cy={n(cy)} rx={n(40 + r() * 80)} ry={n(16 + r() * 40)} fill={SILVER} opacity={0.12} transform={`rotate(${n(r() * 60 - 30)} ${n(cx)} ${n(cy)})`} />;
+                return (
+                  <ellipse
+                    key={i}
+                    cx={n(cx)}
+                    cy={n(cy)}
+                    rx={n(40 + r() * 80)}
+                    ry={n(16 + r() * 40)}
+                    fill={SILVER}
+                    opacity={0.12}
+                    transform={`rotate(${n(r() * 60 - 30)} ${n(cx)} ${n(cy)})`}
+                  />
+                );
               })}
               <Specks x={30} y={40} w={740} h={520} count={90} seed={5} fill="#8a7f6c" />
             </>
@@ -290,13 +374,26 @@ function Scene({ kind, state, variant }: { kind: ArtKind; state: ArtState; varia
           {after ? (
             <>
               <path d="M270 90 L520 80 L508 108 L262 124Z" fill={BONE} opacity={0.14} />
-              <path d="M260 340 A190 190 0 0 1 400 242" fill="none" stroke={BONE} strokeWidth={4} opacity={0.35} strokeLinecap="round" />
+              <path
+                d="M260 340 A190 190 0 0 1 400 242"
+                fill="none"
+                stroke={BONE}
+                strokeWidth={4}
+                opacity={0.35}
+                strokeLinecap="round"
+              />
             </>
           ) : (
             <>
               <rect width={800} height={600} fill="#8a8479" opacity={0.1} />
               <Specks x={0} y={60} w={800} h={540} count={220} seed={61 + variant} fill="#9a917f" max={2.6} />
-              <path d="M270 90 L330 84 M300 150 L420 140 M480 100 L520 160" stroke="#b6ab97" strokeWidth={3} opacity={0.3} strokeLinecap="round" />
+              <path
+                d="M270 90 L330 84 M300 150 L420 140 M480 100 L520 160"
+                stroke="#b6ab97"
+                strokeWidth={3}
+                opacity={0.3}
+                strokeLinecap="round"
+              />
             </>
           )}
         </g>
@@ -331,9 +428,23 @@ function Scene({ kind, state, variant }: { kind: ArtKind; state: ArtState; varia
               <>
                 <rect x={50} y={50} width={700} height={500} fill="#8a8479" opacity={0.16} />
                 {[0, 1, 2, 3, 4, 5].map((i) => (
-                  <ellipse key={i} cx={n(120 + r() * 560)} cy={n(110 + r() * 380)} rx={n(30 + r() * 70)} ry={n(14 + r() * 30)} fill="#0d0e0f" opacity={0.4} />
+                  <ellipse
+                    key={i}
+                    cx={n(120 + r() * 560)}
+                    cy={n(110 + r() * 380)}
+                    rx={n(30 + r() * 70)}
+                    ry={n(14 + r() * 30)}
+                    fill="#0d0e0f"
+                    opacity={0.4}
+                  />
                 ))}
-                <path d="M100 300 C260 270 420 330 700 290M120 410 C300 380 460 440 690 400" fill="none" stroke="#0d0e0f" strokeWidth={3} opacity={0.35} />
+                <path
+                  d="M100 300 C260 270 420 330 700 290M120 410 C300 380 460 440 690 400"
+                  fill="none"
+                  stroke="#0d0e0f"
+                  strokeWidth={3}
+                  opacity={0.35}
+                />
               </>
             )}
           </g>
@@ -343,6 +454,9 @@ function Scene({ kind, state, variant }: { kind: ArtKind; state: ArtState; varia
     }
   }
 }
+
+const a11y = (decorative: boolean, label: string) =>
+  decorative ? ({ "aria-hidden": true, focusable: false } as const) : ({ role: "img", "aria-label": label } as const);
 
 const labels: Record<ArtKind, string> = {
   profile: "side profile of a dark coupe",
@@ -354,22 +468,58 @@ const labels: Record<ArtKind, string> = {
   seat: "stitched leather seat panel",
 };
 
-export function Art({ kind, state = "after", variant = 0, label, className = "", pure = false }: { kind: ArtKind; state?: ArtState; variant?: number; label?: string; className?: string; pure?: boolean }) {
+export function Art({
+  kind,
+  state = "after",
+  variant = 0,
+  label,
+  className = "",
+  pure = false,
+  decorative = false,
+}: {
+  kind: ArtKind;
+  state?: ArtState;
+  variant?: number;
+  label?: string;
+  className?: string;
+  pure?: boolean;
+  decorative?: boolean;
+}) {
   if (kind === "swirl" && !pure) {
-    return <SwirlSplit variant={variant} label={label} className={className} />;
+    return <SwirlSplit variant={variant} label={label} className={className} decorative={decorative} />;
   }
   return (
-    <svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" className={`block h-full w-full ${className}`} role="img" aria-label={label ?? `Illustration: ${labels[kind]}`}>
+    <svg
+      viewBox="0 0 800 600"
+      preserveAspectRatio="xMidYMid slice"
+      className={`block h-full w-full ${className}`}
+      {...a11y(decorative, label ?? `Illustration: ${labels[kind]}`)}
+    >
       <Scene kind={kind} state={state} variant={variant} />
     </svg>
   );
 }
 
 /** The "swirl" test panel shows a 50/50 split when used standalone. */
-function SwirlSplit({ variant, label, className }: { variant: number; label?: string; className: string }) {
+function SwirlSplit({
+  variant,
+  label,
+  className,
+  decorative,
+}: {
+  variant: number;
+  label?: string;
+  className: string;
+  decorative: boolean;
+}) {
   const id = useId();
   return (
-    <svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" className={`block h-full w-full ${className}`} role="img" aria-label={label ?? "Illustration: paint test panel"}>
+    <svg
+      viewBox="0 0 800 600"
+      preserveAspectRatio="xMidYMid slice"
+      className={`block h-full w-full ${className}`}
+      {...a11y(decorative, label ?? "Illustration: paint test panel")}
+    >
       <defs>
         <clipPath id={`${id}-left`}>
           <path d="M0 0H470L370 600H0Z" />

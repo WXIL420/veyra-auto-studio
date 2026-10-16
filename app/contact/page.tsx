@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { Clock, Mail, MapPin, Phone, Truck } from "lucide-react";
 import { ButtonLink, Container, PageHero } from "@/components/ui";
 import { ContactForm } from "@/components/ContactForm";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Contact",
   description:
     "Contact details, hours and service areas for Veyra Auto Studio, a fictional mobile detailing business serving Scottsdale and Phoenix.",
-};
+  path: "/contact",
+});
 
 export default function ContactPage() {
   const details = [
@@ -21,7 +23,8 @@ export default function ContactPage() {
   return (
     <>
       <PageHero eyebrow="Contact" title="Talk to the studio.">
-        Questions about a service, your vehicle or scheduling. Contact details below are placeholders for this fictional demo.
+        Questions about a service, your vehicle or scheduling. Contact details below are placeholders for this fictional
+        demo.
       </PageHero>
       <section className="py-16 sm:py-24">
         <Container className="grid gap-14 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
@@ -33,7 +36,12 @@ export default function ContactPage() {
                   <div className="min-w-0">
                     <p className="font-display text-sm uppercase tracking-[0.24em] text-silver">{label}</p>
                     {href ? (
-                      <a href={href} className="mt-1 block break-words text-xl hover:text-copper-2">{value}</a>
+                      <a
+                        href={href}
+                        className="mt-1 inline-flex min-h-11 items-center break-words text-xl hover:text-copper-2"
+                      >
+                        {value}
+                      </a>
                     ) : (
                       <p className="mt-1 text-xl">{value}</p>
                     )}
@@ -43,8 +51,14 @@ export default function ContactPage() {
             </ul>
             <div className="mt-10 border border-line bg-graphite p-7">
               <h2 className="text-2xl">Ready to schedule?</h2>
-              <p className="mt-2 text-silver">Skip the message and send an appointment request with your preferred date.</p>
-              <div className="mt-5"><ButtonLink href="/book" arrow>Request an appointment</ButtonLink></div>
+              <p className="mt-2 text-silver">
+                Skip the message and send an appointment request with your preferred date.
+              </p>
+              <div className="mt-5">
+                <ButtonLink href="/book" arrow>
+                  Request an appointment
+                </ButtonLink>
+              </div>
             </div>
           </div>
           <div>

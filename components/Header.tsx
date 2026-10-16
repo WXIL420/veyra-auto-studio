@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Menu, X, Phone } from "lucide-react";
 import { Logo } from "./Logo";
 import { nav, site } from "@/lib/site";
@@ -10,27 +10,62 @@ import { buttonStyles } from "./ui";
 
 export function Header() {
   const pathname = usePathname();
-  const [open, setOpen] = useState(false);
+  // Menu state is tied to the pathname it was opened on, so navigating closes it.
+  const [openFor, setOpenFor] = useState<string | null>(null);
+  const open = openFor === pathname;
+  const setOpen = (next: boolean | ((o: boolean) => boolean)) =>
+    setOpenFor((cur) => ((typeof next === "function" ? next(cur === pathname) : next) ? pathname : null));
+  const headerRef = useRef<HTMLElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (!open) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    const toggle = toggleRef.current;
+    const focusables = () =>
+      Array.from(headerRef.current?.querySelectorAll<HTMLElement>("a[href], button") ?? []).filter(
+        (el) => el.getClientRects().length > 0,
+      );
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpenFor(null);
+        return;
+      }
+      if (e.key !== "Tab") return;
+      const items = focusables();
+      if (!items.length) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
+    document.getElementById("mobile-menu")?.querySelector<HTMLElement>("a")?.focus();
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
+      if (toggle && document.activeElement === document.body) toggle.focus();
     };
   }, [open]);
 
   const linkClass = (href: string) =>
     `relative py-2 font-display text-[15px] font-medium uppercase tracking-[0.16em] transition-colors hover:text-bone ${
-      pathname === href ? "text-bone after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:bg-copper" : "text-silver"
+      pathname === href
+        ? "text-bone after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:bg-copper"
+        : "text-silver"
     }`;
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-ink/95 backdrop-blur-sm">
-      <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-copper focus:px-4 focus:py-2 focus:text-ink">
+    <header ref={headerRef} className="sticky top-0 z-40 border-b border-line bg-ink/95 backdrop-blur-sm">
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-copper focus:px-4 focus:py-2 focus:text-ink"
+      >
         Skip to content
       </a>
       <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-5 sm:px-8">
@@ -39,7 +74,12 @@ export function Header() {
         </Link>
         <nav aria-label="Primary" className="hidden items-center gap-7 lg:flex">
           {nav.map((l) => (
-            <Link key={l.href} href={l.href} className={linkClass(l.href)} aria-current={pathname === l.href ? "page" : undefined}>
+            <Link
+              key={l.href}
+              href={l.href}
+              className={linkClass(l.href)}
+              aria-current={pathname === l.href ? "page" : undefined}
+            >
               {l.label}
             </Link>
           ))}
@@ -53,6 +93,7 @@ export function Header() {
             Book
           </Link>
           <button
+            ref={toggleRef}
             type="button"
             className="grid h-11 w-11 place-items-center text-bone lg:hidden"
             aria-expanded={open}
@@ -65,7 +106,11 @@ export function Header() {
         </div>
       </div>
       {open && (
-        <nav id="mobile-menu" aria-label="Mobile" className="fixed inset-x-0 top-[73px] bottom-0 overflow-y-auto bg-ink px-5 pb-10 pt-4 lg:hidden">
+        <nav
+          id="mobile-menu"
+          aria-label="Mobile"
+          className="absolute inset-x-0 top-full h-[calc(100dvh-73px)] overflow-y-auto border-t border-line bg-ink px-5 pb-24 pt-4 lg:hidden"
+        >
           <ul className="divide-y divide-line border-y border-line">
             {[{ href: "/", label: "Home" }, ...nav, { href: "/book", label: "Book" }].map((l) => (
               <li key={l.href}>

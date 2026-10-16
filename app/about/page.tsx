@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { Crosshair, MessageSquareText, HeartHandshake } from "lucide-react";
 import { ButtonLink, Container, Eyebrow, PageHero, SectionHeading } from "@/components/ui";
 import { Art } from "@/components/Art";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "About",
   description:
     "Veyra Auto Studio is a fictional premium mobile detailing brand built around precision over volume, clear recommendations and respect for every vehicle.",
-};
+  path: "/about",
+});
 
 const principles = [
   {
@@ -31,11 +33,12 @@ export default function AboutPage() {
   return (
     <>
       <PageHero eyebrow="About Veyra" title="Detailing without the rushed-shop experience.">
-        Veyra Auto Studio is a premium mobile detailing brand for Scottsdale and Phoenix, built around doing fewer things properly.
+        Veyra Auto Studio is a premium mobile detailing brand for Scottsdale and Phoenix, built around doing fewer
+        things properly.
       </PageHero>
 
       <section className="py-20 sm:py-28">
-        <Container className="grid gap-px bg-line md:grid-cols-3 [&>div]:bg-ink">
+        <Container className="grid gap-px bg-line lg:grid-cols-3 [&>div]:bg-ink">
           {principles.map(({ icon: Icon, title, text }) => (
             <div key={title} className="p-8 sm:p-10">
               <Icon aria-hidden className="h-9 w-9 text-copper-2" strokeWidth={1.4} />
@@ -53,13 +56,26 @@ export default function AboutPage() {
           </div>
           <div>
             <SectionHeading eyebrow="The approach" title="Slower on purpose.">
-              Good detailing is mostly preparation and patience. Every service begins with an inspection, a clear scope and a conversation about what you want the vehicle to look like.
+              Good detailing is mostly preparation and patience. Every service begins with an inspection, a clear scope
+              and a conversation about what you want the vehicle to look like.
             </SectionHeading>
             <ul className="mt-8 space-y-4 text-silver">
-              <li><span className="text-bone">Inspect first.</span> We look at the paint, glass and interior before recommending anything.</li>
-              <li><span className="text-bone">Explain the scope.</span> You see what is included, how long it takes and what it costs, in writing.</li>
-              <li><span className="text-bone">Work carefully.</span> Gentle methods first, stronger ones only when the vehicle truly needs them.</li>
-              <li><span className="text-bone">Walk through it.</span> We review the finished vehicle together and explain how to maintain it.</li>
+              <li>
+                <span className="text-bone">Inspect first.</span> We look at the paint, glass and interior before
+                recommending anything.
+              </li>
+              <li>
+                <span className="text-bone">Explain the scope.</span> You see what is included, how long it takes and
+                what it costs, in writing.
+              </li>
+              <li>
+                <span className="text-bone">Work carefully.</span> Gentle methods first, stronger ones only when the
+                vehicle truly needs them.
+              </li>
+              <li>
+                <span className="text-bone">Walk through it.</span> We review the finished vehicle together and explain
+                how to maintain it.
+              </li>
             </ul>
           </div>
         </Container>
@@ -70,11 +86,18 @@ export default function AboutPage() {
           <Eyebrow>About this project</Eyebrow>
           <h2 className="mt-4 text-3xl sm:text-4xl">A fictional business, built as a portfolio piece.</h2>
           <p className="mt-5 leading-relaxed text-silver">
-            Veyra Auto Studio is not a real company. This website is a personal portfolio project that shows how a premium service business could present its services, pricing and booking flow. The contact details are placeholders, the reviews are sample content, and the imagery is original illustration. No appointments, payments or customer information are collected.
+            Veyra Auto Studio is not a real company. This website is a personal portfolio project that shows how a
+            premium service business could present its services, pricing and booking flow. The contact details are
+            placeholders and the imagery is original illustration. No appointments, payments or customer information are
+            collected.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <ButtonLink href="/services" arrow>See the services</ButtonLink>
-            <ButtonLink href="/contact" variant="secondary">Contact details</ButtonLink>
+            <ButtonLink href="/services" arrow>
+              See the services
+            </ButtonLink>
+            <ButtonLink href="/contact" variant="secondary">
+              Contact details
+            </ButtonLink>
           </div>
         </Container>
       </section>

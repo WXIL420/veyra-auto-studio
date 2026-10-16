@@ -30,13 +30,21 @@ export function ServiceCard({ service, compact = false }: { service: Service; co
             {i}
           </li>
         ))}
-        {compact && service.inclusions.length > 4 && <li className="pl-7 text-silver">+ {service.inclusions.length - 4} more</li>}
+        {compact && service.inclusions.length > 4 && (
+          <li className="pl-7 text-silver">+ {service.inclusions.length - 4} more</li>
+        )}
       </ul>
-      <div className="mt-auto flex flex-wrap gap-x-6 gap-y-2 pt-8 font-display text-[15px] font-semibold uppercase tracking-[0.12em]">
-        <Link href={`/estimate?service=${service.id}`} className="text-copper-2 hover:text-bone">
+      <div className="mt-auto flex flex-wrap gap-x-6 gap-y-0 pt-6 font-display text-[15px] font-semibold uppercase tracking-[0.12em]">
+        <Link
+          href={`/estimate?service=${service.id}`}
+          className="inline-flex min-h-11 items-center text-copper-2 hover:text-bone"
+        >
           Build estimate
         </Link>
-        <Link href={`/book?service=${service.id}`} className="text-bone hover:text-copper-2">
+        <Link
+          href={`/book?service=${service.id}`}
+          className="inline-flex min-h-11 items-center text-bone hover:text-copper-2"
+        >
           Request booking
         </Link>
       </div>

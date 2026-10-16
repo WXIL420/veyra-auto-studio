@@ -37,7 +37,9 @@ export function ButtonLink({
 
 export function Eyebrow({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (
-    <p className={`flex items-center gap-3 font-display text-sm font-medium uppercase tracking-[0.28em] text-copper-2 ${className}`}>
+    <p
+      className={`flex items-center gap-3 font-display text-sm font-medium uppercase tracking-[0.28em] text-copper-2 ${className}`}
+    >
       <span aria-hidden className="h-px w-8 bg-copper" />
       {children}
     </p>

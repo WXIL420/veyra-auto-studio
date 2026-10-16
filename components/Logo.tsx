@@ -12,7 +12,17 @@ export function Emblem({ className = "h-9 w-9" }: { className?: string }) {
 /** Hand-built angular letterforms: V E Y R A. */
 export function Wordmark({ className = "h-5" }: { className?: string }) {
   return (
-    <svg viewBox="-3 -3 162 34" className={className} aria-hidden="true" focusable="false" fill="none" stroke="currentColor" strokeWidth="3.4" strokeLinejoin="miter" strokeMiterlimit="10">
+    <svg
+      viewBox="-3 -3 162 34"
+      className={className}
+      aria-hidden="true"
+      focusable="false"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="3.4"
+      strokeLinejoin="miter"
+      strokeMiterlimit="10"
+    >
       <path d="M0 0 10 28 20 0" />
       <path d="M52 2H34v24h18M34 14h14" />
       <path d="M68 0l10 14L88 0M78 14v14" />

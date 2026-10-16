@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { Check, Minus, Clock, Target } from "lucide-react";
 import { ButtonLink, Container, PageHero, SectionHeading } from "@/components/ui";
 import { addons, services, vehicleSizes } from "@/lib/data";
 import { money } from "@/lib/estimate";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Detailing Services & Pricing",
   description:
     "Five detailing packages from $179: Essential, Signature, Paint Enhancement, Ceramic Protection and Full Paint Correction, with add-ons and vehicle-size pricing.",
-};
+  path: "/services",
+});
 
 type Cell = boolean | string;
 const rows: { label: string; v: Cell[] }[] = [
@@ -49,7 +51,8 @@ export default function ServicesPage() {
   return (
     <>
       <PageHero eyebrow="Services" title="Five levels of care, priced openly.">
-        Every package lists exactly what is included. Starting prices apply to a coupe or sedan in good condition; vehicle size, add-ons and condition are shown in the estimate builder.
+        Every package lists exactly what is included. Starting prices apply to a coupe or sedan in good condition;
+        vehicle size, add-ons and condition are shown in the estimate builder.
       </PageHero>
 
       <section className="py-20 sm:py-28">
@@ -88,7 +91,11 @@ export default function ServicesPage() {
                     </li>
                   ))}
                 </ul>
-                {s.quote && <p className="mt-5 text-sm text-silver">Pricing is confirmed by written quote after a paint inspection.</p>}
+                {s.quote && (
+                  <p className="mt-5 text-sm text-silver">
+                    Pricing is confirmed by written quote after a paint inspection.
+                  </p>
+                )}
               </div>
               <div className="flex flex-col gap-3 lg:justify-end">
                 <ButtonLink href={`/book?service=${s.id}`} arrow>
@@ -106,16 +113,28 @@ export default function ServicesPage() {
       <section className="border-y border-line bg-graphite py-20 sm:py-28">
         <Container>
           <SectionHeading eyebrow="Compare" title="Which service fits?" />
-          <div className="relative mt-12 overflow-x-auto border border-line" tabIndex={0} role="region" aria-label="Service comparison table, scrolls horizontally on small screens">
+          <div
+            className="relative mt-12 overflow-x-auto border border-line"
+            tabIndex={0}
+            role="region"
+            aria-label="Service comparison table, scrolls horizontally on small screens"
+          >
             <table className="w-full min-w-[820px] border-collapse text-left text-sm">
               <caption className="sr-only">Comparison of the five Veyra Auto Studio detailing services</caption>
               <thead>
                 <tr className="border-b border-line bg-ink">
-                  <th scope="col" className="sticky left-0 bg-ink p-4 font-display text-sm uppercase tracking-[0.2em] text-silver">
+                  <th
+                    scope="col"
+                    className="sticky left-0 bg-ink p-4 font-display text-sm uppercase tracking-[0.2em] text-silver"
+                  >
                     Feature
                   </th>
                   {services.map((s) => (
-                    <th key={s.id} scope="col" className="p-4 text-center font-display text-lg uppercase tracking-wide text-bone">
+                    <th
+                      key={s.id}
+                      scope="col"
+                      className="p-4 text-center font-display text-lg uppercase tracking-wide text-bone"
+                    >
                       {s.name}
                     </th>
                   ))}
@@ -137,7 +156,10 @@ export default function ServicesPage() {
               </tbody>
             </table>
           </div>
-          <p className="mt-4 text-sm text-silver">The table summarizes each package&rsquo;s listed inclusions. A dash means the item is not listed for that package.</p>
+          <p className="mt-4 text-sm text-silver">
+            The table summarizes each package&rsquo;s listed inclusions. A dash means the item is not listed for that
+            package.
+          </p>
         </Container>
       </section>
 
@@ -166,7 +188,9 @@ export default function ServicesPage() {
                     <p className="font-display text-xl font-semibold uppercase tracking-wide">{v.label}</p>
                     <p className="mt-1 text-sm text-silver">{v.examples}</p>
                   </div>
-                  <p className="font-display text-2xl font-semibold text-copper-2">{v.adjustment ? `+${money(v.adjustment)}` : "$0"}</p>
+                  <p className="font-display text-2xl font-semibold text-copper-2">
+                    {v.adjustment ? `+${money(v.adjustment)}` : "$0"}
+                  </p>
                 </li>
               ))}
             </ul>
@@ -180,10 +204,16 @@ export default function ServicesPage() {
       <section className="border-t border-line bg-graphite py-20 text-center">
         <Container>
           <h2 className="text-4xl sm:text-5xl">Not sure which service?</h2>
-          <p className="mx-auto mt-4 max-w-lg text-silver">Build an estimate, or describe your vehicle in an appointment request.</p>
+          <p className="mx-auto mt-4 max-w-lg text-silver">
+            Build an estimate, or describe your vehicle in an appointment request.
+          </p>
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-            <ButtonLink href="/estimate" arrow>Build an estimate</ButtonLink>
-            <ButtonLink href="/book" variant="secondary">Request an appointment</ButtonLink>
+            <ButtonLink href="/estimate" arrow>
+              Build an estimate
+            </ButtonLink>
+            <ButtonLink href="/book" variant="secondary">
+              Request an appointment
+            </ButtonLink>
           </div>
         </Container>
       </section>

@@ -26,23 +26,58 @@ export function ContactForm() {
       <div role="status" className="border border-sage/60 bg-sage/10 p-8">
         <CheckCircle2 aria-hidden className="h-8 w-8 text-sage-2" />
         <h3 className="mt-4 text-3xl">Message received — in your browser only.</h3>
-        <p className="mt-3 leading-relaxed text-silver">This is a portfolio demonstration. Your message was not transmitted or stored, and no one will reply.</p>
-        <button type="button" onClick={() => { setV({ name: "", email: "", message: "" }); setSent(false); }} className={`${buttonStyles.secondary} mt-6`}>
+        <p className="mt-3 leading-relaxed text-silver">
+          This is a portfolio demonstration. Your message was not transmitted or stored, and no one will reply.
+        </p>
+        <button
+          type="button"
+          onClick={() => {
+            setV({ name: "", email: "", message: "" });
+            setSent(false);
+          }}
+          className={`${buttonStyles.secondary} mt-6`}
+        >
           Write another message
         </button>
       </div>
     );
   }
 
-  const input = (id: "name" | "email" | "message", label: string, props: React.InputHTMLAttributes<HTMLInputElement> = {}) => (
+  const input = (
+    id: "name" | "email" | "message",
+    label: string,
+    props: React.InputHTMLAttributes<HTMLInputElement> = {},
+  ) => (
     <div>
-      <label htmlFor={`c-${id}`} className="font-display text-sm uppercase tracking-[0.2em]">{label}</label>
+      <label htmlFor={`c-${id}`} className="font-display text-sm uppercase tracking-[0.2em]">
+        {label}
+      </label>
       {id === "message" ? (
-        <textarea id="c-message" rows={5} value={v.message} onChange={(e) => setV({ ...v, message: e.target.value })} aria-invalid={!!errors.message} aria-describedby={errors.message ? "c-message-err" : undefined} className={`${field} ${errors.message ? "border-danger" : "border-line"}`} />
+        <textarea
+          id="c-message"
+          rows={5}
+          value={v.message}
+          onChange={(e) => setV({ ...v, message: e.target.value })}
+          aria-invalid={!!errors.message}
+          aria-describedby={errors.message ? "c-message-err" : undefined}
+          className={`${field} ${errors.message ? "border-danger" : "border-line"}`}
+        />
       ) : (
-        <input id={`c-${id}`} value={v[id]} onChange={(e) => setV({ ...v, [id]: e.target.value })} aria-invalid={!!errors[id]} aria-describedby={errors[id] ? `c-${id}-err` : undefined} className={`${field} ${errors[id] ? "border-danger" : "border-line"}`} {...props} />
+        <input
+          id={`c-${id}`}
+          value={v[id]}
+          onChange={(e) => setV({ ...v, [id]: e.target.value })}
+          aria-invalid={!!errors[id]}
+          aria-describedby={errors[id] ? `c-${id}-err` : undefined}
+          className={`${field} ${errors[id] ? "border-danger" : "border-line"}`}
+          {...props}
+        />
       )}
-      {errors[id] && <p id={`c-${id}-err`} className="mt-2 text-sm text-danger">{errors[id]}</p>}
+      {errors[id] && (
+        <p id={`c-${id}-err`} className="mt-2 text-sm text-danger">
+          {errors[id]}
+        </p>
+      )}
     </div>
   );
 
@@ -65,7 +100,9 @@ export function ContactForm() {
       {input("name", "Name", { autoComplete: "name" })}
       {input("email", "Email", { type: "email", autoComplete: "email" })}
       {input("message", "Message")}
-      <button type="submit" className={buttonStyles.primary}>Send message</button>
+      <button type="submit" className={buttonStyles.primary}>
+        Send message
+      </button>
     </form>
   );
 }

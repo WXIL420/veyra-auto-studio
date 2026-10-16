@@ -1,11 +1,37 @@
+import type { Metadata } from "next";
 import Link from "next/link";
-import { Calendar, Clock, MapPin, ReceiptText, ShieldCheck, Droplets, Sun, Sparkles, Quote } from "lucide-react";
+import {
+  Calendar,
+  Clock,
+  MapPin,
+  ReceiptText,
+  ShieldCheck,
+  Droplets,
+  Sun,
+  Sparkles,
+  FileText,
+  Gauge,
+  Hourglass,
+} from "lucide-react";
 import { ButtonLink, Container, Eyebrow, SectionHeading } from "@/components/ui";
 import { HeroCar, Art } from "@/components/Art";
 import { ServiceCard } from "@/components/ServiceCard";
 import { CompareSlider } from "@/components/CompareSlider";
-import { reviews, services, steps } from "@/lib/data";
+import { services, steps } from "@/lib/data";
 import { site } from "@/lib/site";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+  openGraph: {
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
+    url: "/",
+    type: "website",
+    siteName: "Veyra Auto Studio",
+    title: "Veyra Auto Studio — Precision in every reflection.",
+    description:
+      "Premium mobile detailing in Scottsdale and Phoenix. Fictional portfolio demonstration — no real bookings.",
+  },
+};
 
 const trust = [
   { icon: MapPin, title: "Mobile service", text: "Five Phoenix-area cities" },
@@ -14,13 +40,34 @@ const trust = [
   { icon: ShieldCheck, title: "Honest scope", text: "Condition-based pricing" },
 ];
 
+const principles = [
+  {
+    icon: FileText,
+    title: "Written scope",
+    text: "Every appointment begins with a clear description of the work, starting price and expected time.",
+  },
+  {
+    icon: Gauge,
+    title: "Condition-based pricing",
+    text: "Vehicle size and condition affect the final scope. Recommendations are explained before additional work begins.",
+  },
+  {
+    icon: Hourglass,
+    title: "Time reserved for the vehicle",
+    text: "Appointments are scheduled with enough time to complete the selected service properly instead of rushing vehicles through a queue.",
+  },
+];
+
 export default function Home() {
   const featured = services.filter((s) => ["signature", "enhancement", "ceramic"].includes(s.id));
   return (
     <>
       {/* Hero */}
       <section className="relative isolate overflow-hidden border-b border-line bg-ink">
-        <div aria-hidden className="absolute inset-0 -z-10 bg-[radial-gradient(60%_50%_at_75%_85%,rgba(200,115,67,0.14),transparent)]" />
+        <div
+          aria-hidden
+          className="absolute inset-0 -z-10 bg-[radial-gradient(60%_50%_at_75%_85%,rgba(200,115,67,0.14),transparent)]"
+        />
         <div aria-hidden className="absolute inset-x-0 bottom-[14%] -z-10 h-px bg-line" />
         <Container className="pt-12 sm:pt-16 lg:pt-14">
           <div className="max-w-5xl">
@@ -31,7 +78,8 @@ export default function Home() {
               <span className="text-copper-2">A cleaner standard.</span>
             </h1>
             <p className="rise rise-3 mt-7 max-w-xl text-lg leading-relaxed text-silver sm:text-xl">
-              Precision detailing, paint correction and ceramic protection, brought to your driveway across Scottsdale and Phoenix.
+              Precision detailing, paint correction and ceramic protection, brought to your driveway across Scottsdale
+              and Phoenix.
             </p>
             <div className="rise rise-4 mt-9 flex flex-col gap-3 sm:flex-row">
               <ButtonLink href="/estimate" arrow>
@@ -42,7 +90,7 @@ export default function Home() {
               </ButtonLink>
             </div>
           </div>
-          <div className="relative mt-8 -mb-4 sm:mt-0 sm:-mb-8 lg:-mt-20">
+          <div className="relative mt-8 sm:mt-0 lg:-mt-20">
             <div className="ml-auto aspect-[940/300] w-full lg:w-[88%]">
               <HeroCar />
             </div>
@@ -68,7 +116,7 @@ export default function Home() {
       </section>
 
       {/* Featured packages */}
-      <section className="py-20 sm:py-28">
+      <section className="py-16 sm:py-24">
         <Container>
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <SectionHeading eyebrow="Featured packages" title="Detailing, scoped to the vehicle.">
@@ -78,7 +126,7 @@ export default function Home() {
               All five services
             </ButtonLink>
           </div>
-          <div className="mt-14 grid gap-6 lg:grid-cols-3">
+          <div className="mt-12 grid gap-6 lg:grid-cols-3">
             {featured.map((s) => (
               <ServiceCard key={s.id} service={s} compact />
             ))}
@@ -87,7 +135,7 @@ export default function Home() {
       </section>
 
       {/* Before and after */}
-      <section className="border-y border-line bg-graphite py-20 sm:py-28">
+      <section className="border-y border-line bg-graphite py-16 sm:py-24">
         <Container className="grid items-center gap-12 lg:grid-cols-[1fr_1.2fr] lg:gap-20">
           <div>
             <SectionHeading eyebrow="Before &amp; after" title="See the difference a correction makes.">
@@ -107,15 +155,17 @@ export default function Home() {
       </section>
 
       {/* How it works */}
-      <section className="py-20 sm:py-28">
+      <section className="py-16 sm:py-24">
         <Container>
           <SectionHeading eyebrow="How mobile service works" title="Five steps, no rushing.">
             From the first estimate to the final walk-around, you know what is happening and why.
           </SectionHeading>
-          <ol className="mt-14 grid gap-px bg-line sm:grid-cols-2 lg:grid-cols-5 [&>li]:bg-ink">
+          <ol className="mt-12 grid gap-px bg-line sm:grid-cols-2 lg:grid-cols-5 [&>li]:bg-ink">
             {steps.map((s, i) => (
               <li key={s.title} className="p-7">
-                <span className="font-display text-5xl font-semibold text-copper">{String(i + 1).padStart(2, "0")}</span>
+                <span className="font-display text-5xl font-semibold text-copper">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
                 <h3 className="mt-5 text-2xl">{s.title}</h3>
                 <p className="mt-3 text-[15px] leading-relaxed text-silver">{s.text}</p>
               </li>
@@ -130,7 +180,7 @@ export default function Home() {
           <div className="relative aspect-[4/3] border-line lg:aspect-auto lg:min-h-[520px] lg:border-r">
             <Art kind="beads" state="after" variant={1} label="Illustration: water beading on ceramic-coated paint" />
           </div>
-          <div className="flex flex-col justify-center py-14 lg:py-20 lg:pl-16">
+          <div className="flex flex-col justify-center py-12 lg:py-16 lg:pl-16">
             <SectionHeading eyebrow="Ceramic protection" title="Built for the Arizona sun.">
               A ceramic coating bonds to prepared paint to add gloss, shed water and dust, and make every wash easier.
             </SectionHeading>
@@ -147,7 +197,10 @@ export default function Home() {
                 </li>
               ))}
             </ul>
-            <p className="mt-8 text-sm text-silver">Ceramic Protection starts at $799 and takes a day or more. Coatings reduce maintenance but are not scratch-proof.</p>
+            <p className="mt-8 text-sm text-silver">
+              Ceramic Protection starts at $799 and takes a day or more. Coatings reduce maintenance but are not
+              scratch-proof.
+            </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <ButtonLink href="/estimate?service=ceramic" arrow>
                 Estimate ceramic
@@ -160,31 +213,24 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* Reviews */}
-      <section className="py-20 sm:py-28">
+      {/* Principles */}
+      <section className="py-16 sm:py-24">
         <Container>
-          <SectionHeading eyebrow="Sample reviews" title="What clients might say.">
-            Demonstration copy only. Veyra is a fictional business, so these are sample reviews written for the design — not real customer feedback.
-          </SectionHeading>
-          <div className="mt-14 grid gap-6 md:grid-cols-3">
-            {reviews.map((r) => (
-              <figure key={r.name} className="flex flex-col border border-line bg-graphite p-8">
-                <span className="mb-5 inline-block self-start border border-copper/60 px-2.5 py-1 font-display text-[11px] font-semibold uppercase tracking-[0.2em] text-copper-2">
-                  Sample content
-                </span>
-                <Quote aria-hidden className="h-7 w-7 text-copper" strokeWidth={1.5} />
-                <blockquote className="mt-4 flex-1 text-lg leading-relaxed">{r.text}</blockquote>
-                <figcaption className="mt-6 border-t border-line pt-4 text-sm text-silver">
-                  <span className="text-bone">{r.name}</span> · {r.vehicle}
-                </figcaption>
-              </figure>
+          <SectionHeading eyebrow="The Veyra standard" title="Why owners choose appointment-only care." />
+          <ul className="mt-12 grid gap-px bg-line lg:grid-cols-3 [&>li]:bg-ink">
+            {principles.map(({ icon: Icon, title, text }) => (
+              <li key={title} className="p-8 sm:p-10">
+                <Icon aria-hidden className="h-8 w-8 text-copper-2" strokeWidth={1.4} />
+                <h3 className="mt-6 text-3xl">{title}</h3>
+                <p className="mt-3 leading-relaxed text-silver">{text}</p>
+              </li>
             ))}
-          </div>
+          </ul>
         </Container>
       </section>
 
       {/* Service areas */}
-      <section className="border-y border-line bg-graphite py-20 sm:py-24">
+      <section className="border-y border-line bg-graphite py-14 sm:py-20">
         <Container className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:items-center">
           <SectionHeading eyebrow="Service areas" title="Scottsdale, Phoenix and nearby.">
             Mobile service covers five Valley cities. Studio service is available by appointment.
@@ -205,12 +251,13 @@ export default function Home() {
       </section>
 
       {/* Final CTA */}
-      <section className="py-24 sm:py-32">
+      <section className="py-20 sm:py-28">
         <Container className="text-center">
           <Eyebrow className="justify-center">Ready when you are</Eyebrow>
           <h2 className="mx-auto mt-6 max-w-4xl text-5xl sm:text-6xl lg:text-8xl">Precision in every reflection.</h2>
           <p className="mx-auto mt-6 max-w-xl text-lg text-silver">
-            Build an estimate in under a minute, then send an appointment request. This demo never transmits what you enter.
+            Build an estimate in under a minute, then send an appointment request. This demo never transmits what you
+            enter.
           </p>
           <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
             <ButtonLink href="/book" arrow>
@@ -221,7 +268,11 @@ export default function Home() {
             </ButtonLink>
           </div>
           <p className="mt-6 text-sm text-silver">
-            Or <Link className="underline underline-offset-4 hover:text-bone" href="/contact">view contact details</Link>.
+            Or{" "}
+            <Link className="underline underline-offset-4 hover:text-bone" href="/contact">
+              view contact details
+            </Link>
+            .
           </p>
         </Container>
       </section>

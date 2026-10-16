@@ -6,8 +6,7 @@ export const site = {
   email: "book@veyraauto.example",
   hours: "Monday–Saturday, 7:00 AM–6:00 PM",
   areas: ["Scottsdale", "Paradise Valley", "Phoenix", "Tempe", "Fountain Hills"],
-  demoNotice:
-    "Portfolio demonstration — information entered here is not transmitted or stored.",
+  demoNotice: "Portfolio demonstration — information entered here is not transmitted or stored.",
   description:
     "Veyra Auto Studio is a fictional premium mobile detailing company in Scottsdale and Phoenix, Arizona, created as a personal portfolio project.",
 } as const;

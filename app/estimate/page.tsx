@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { Suspense } from "react";
 import { Container, PageHero } from "@/components/ui";
 import { EstimateBuilder } from "@/components/EstimateBuilder";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Instant Detailing Estimate",
   description:
     "Build an instant estimate for your vehicle: choose size, service package, add-ons and condition, then continue to an appointment request.",
-};
+  path: "/estimate",
+});
 
 export default function EstimatePage() {
   return (

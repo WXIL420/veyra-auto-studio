@@ -1,9 +1,4 @@
-export type ServiceId =
-  | "essential"
-  | "signature"
-  | "enhancement"
-  | "ceramic"
-  | "correction";
+export type ServiceId = "essential" | "signature" | "enhancement" | "ceramic" | "correction";
 
 export type Service = {
   id: ServiceId;
@@ -26,8 +21,7 @@ export const services: Service[] = [
     price: 179,
     duration: "Approximately 2 hours",
     hours: [2, 2],
-    bestFor:
-      "A well-kept daily driver that needs a reliable reset between larger services.",
+    bestFor: "A well-kept daily driver that needs a reliable reset between larger services.",
     summary: "A careful hand wash and a clean cabin, done properly.",
     inclusions: [
       "Hand wash and dry",
@@ -44,8 +38,7 @@ export const services: Service[] = [
     price: 299,
     duration: "Approximately 3–4 hours",
     hours: [3, 4],
-    bestFor:
-      "Vehicles that see regular use and need a deeper clean inside and a smoother, protected finish outside.",
+    bestFor: "Vehicles that see regular use and need a deeper clean inside and a smoother, protected finish outside.",
     summary: "Our most balanced service for inside and out.",
     featured: true,
     inclusions: [
@@ -64,8 +57,7 @@ export const services: Service[] = [
     price: 449,
     duration: "Approximately 5–6 hours",
     hours: [5, 6],
-    bestFor:
-      "Dull or lightly swirled paint on a vehicle you want to look noticeably sharper.",
+    bestFor: "Dull or lightly swirled paint on a vehicle you want to look noticeably sharper.",
     summary: "A single-stage polish that brings back depth and clarity.",
     inclusions: [
       "Exterior preparation",
@@ -82,8 +74,7 @@ export const services: Service[] = [
     price: 799,
     duration: "Starting at one day",
     hours: null,
-    bestFor:
-      "Owners who want long-term gloss, easier washing and protection against Arizona sun and dust.",
+    bestFor: "Owners who want long-term gloss, easier washing and protection against Arizona sun and dust.",
     summary: "Prepared paint, sealed under a ceramic coating.",
     inclusions: [
       "Exterior preparation",
@@ -101,8 +92,7 @@ export const services: Service[] = [
     duration: "Quote required",
     hours: null,
     quote: true,
-    bestFor:
-      "Enthusiast and show vehicles, or paint with heavier defects that need a multi-stage approach.",
+    bestFor: "Enthusiast and show vehicles, or paint with heavier defects that need a multi-stage approach.",
     summary: "Inspection-led correction finished with a ceramic coating.",
     inclusions: [
       "Multi-stage correction",
@@ -116,8 +106,7 @@ export const services: Service[] = [
   },
 ];
 
-export const getService = (id: string | null | undefined) =>
-  services.find((s) => s.id === id);
+export const getService = (id: string | null | undefined) => services.find((s) => s.id === id);
 
 export type VehicleSize = {
   id: "coupe-sedan" | "compact-suv" | "large-suv" | "oversized";
@@ -153,18 +142,41 @@ export const vehicleSizes: VehicleSize[] = [
   },
 ];
 
-export const getSize = (id: string | null | undefined) =>
-  vehicleSizes.find((s) => s.id === id);
+export const getSize = (id: string | null | undefined) => vehicleSizes.find((s) => s.id === id);
 
 export type Addon = { id: string; name: string; price: number; minutes: number; note: string };
 
 export const addons: Addon[] = [
-  { id: "pet-hair", name: "Pet-hair removal", price: 45, minutes: 30, note: "Embedded hair lifted from carpet and seating." },
-  { id: "engine-bay", name: "Engine-bay detail", price: 60, minutes: 30, note: "Careful degrease, dress and wipe-down." },
+  {
+    id: "pet-hair",
+    name: "Pet-hair removal",
+    price: 45,
+    minutes: 30,
+    note: "Embedded hair lifted from carpet and seating.",
+  },
+  {
+    id: "engine-bay",
+    name: "Engine-bay detail",
+    price: 60,
+    minutes: 30,
+    note: "Careful degrease, dress and wipe-down.",
+  },
   { id: "headlight", name: "Headlight restoration", price: 90, minutes: 45, note: "Clears yellowed or hazy lenses." },
   { id: "odor", name: "Odor treatment", price: 75, minutes: 45, note: "Targeted treatment for lingering smells." },
-  { id: "windshield", name: "Windshield coating", price: 65, minutes: 15, note: "Hydrophobic coat for better rain visibility." },
-  { id: "wheel-ceramic", name: "Wheel ceramic coating", price: 125, minutes: 60, note: "Easier brake-dust cleanup on all four wheels." },
+  {
+    id: "windshield",
+    name: "Windshield coating",
+    price: 65,
+    minutes: 15,
+    note: "Hydrophobic coat for better rain visibility.",
+  },
+  {
+    id: "wheel-ceramic",
+    name: "Wheel ceramic coating",
+    price: 125,
+    minutes: 60,
+    note: "Easier brake-dust cleanup on all four wheels.",
+  },
 ];
 
 export type Condition = {
@@ -207,8 +219,7 @@ export const conditions: Condition[] = [
   },
 ];
 
-export const getCondition = (id: string | null | undefined) =>
-  conditions.find((c) => c.id === id);
+export const getCondition = (id: string | null | undefined) => conditions.find((c) => c.id === id);
 
 export const timeWindows = [
   "Morning (7:00–10:00 AM)",
@@ -259,24 +270,6 @@ export const faqs: Faq[] = [
   {
     q: "Which areas do you serve?",
     a: "Mobile service covers Scottsdale, Paradise Valley, Phoenix, Tempe and Fountain Hills. Appointment-only studio service is also available. If you are just outside these areas, include your location in your request and we would let you know what is possible.",
-  },
-];
-
-export const reviews = [
-  {
-    name: "Sample reviewer A.",
-    vehicle: "Performance coupe owner",
-    text: "They explained what the paint needed before touching it, and nothing was oversold. The finish looked deeper without looking artificial.",
-  },
-  {
-    name: "Sample reviewer B.",
-    vehicle: "Daily-driver SUV owner",
-    text: "The mobile visit was tidy and on time. The interior felt properly cleaned rather than just wiped down.",
-  },
-  {
-    name: "Sample reviewer C.",
-    vehicle: "Enthusiast owner",
-    text: "I appreciated the written scope and the honest limits on what correction could do. The reflections after were excellent.",
   },
 ];
 

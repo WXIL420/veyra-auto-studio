@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { Plus } from "lucide-react";
 import { ButtonLink, Container, PageHero } from "@/components/ui";
 import { faqs } from "@/lib/data";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Frequently Asked Questions",
   description:
     "Answers about water and power, appointment length, apartments, ceramic coatings, paint correction limits, weather, estimates, preparation, deposits and service areas.",
-};
+  path: "/faq",
+});
 
 export default function FaqPage() {
   return (
@@ -22,7 +24,10 @@ export default function FaqPage() {
               <details key={f.q} className="group py-1" name="faq" open={i === 0}>
                 <summary className="flex min-h-14 cursor-pointer items-center justify-between gap-6 py-4 font-display text-xl font-medium uppercase tracking-wide hover:text-copper-2 sm:text-2xl">
                   {f.q}
-                  <Plus aria-hidden className="h-5 w-5 shrink-0 text-copper-2 transition-transform group-open:rotate-45" />
+                  <Plus
+                    aria-hidden
+                    className="h-5 w-5 shrink-0 text-copper-2 transition-transform group-open:rotate-45"
+                  />
                 </summary>
                 <p className="max-w-3xl pb-6 leading-relaxed text-silver">{f.a}</p>
               </details>
@@ -34,8 +39,12 @@ export default function FaqPage() {
               <p className="mt-2 text-silver">Send a message or start an appointment request.</p>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row">
-              <ButtonLink href="/contact" variant="secondary">Contact</ButtonLink>
-              <ButtonLink href="/book" arrow>Book</ButtonLink>
+              <ButtonLink href="/contact" variant="secondary">
+                Contact
+              </ButtonLink>
+              <ButtonLink href="/book" arrow>
+                Book
+              </ButtonLink>
             </div>
           </div>
         </Container>

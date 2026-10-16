@@ -35,8 +35,7 @@ const fmtHours = (h: number) => {
   return Number.isInteger(r) ? String(r) : r.toFixed(1);
 };
 
-export const money = (n: number) =>
-  `$${n.toLocaleString("en-US", { maximumFractionDigits: 0 })}`;
+export const money = (n: number) => `$${n.toLocaleString("en-US", { maximumFractionDigits: 0 })}`;
 
 export function calculate(input: EstimateInput): Estimate | null {
   const service = getService(input.serviceId);
@@ -56,9 +55,7 @@ export function calculate(input: EstimateInput): Estimate | null {
   if (service.quote) {
     durationLabel = "Quote required — scheduled after paint inspection";
   } else if (!service.hours) {
-    durationLabel = extraHours
-      ? "Starting at one day (add-ons may extend this)"
-      : "Starting at one day";
+    durationLabel = extraHours ? "Starting at one day (add-ons may extend this)" : "Starting at one day";
   } else {
     const lo = (service.hours[0] + extraHours) * condition.timeFactor;
     const hi = (service.hours[1] + extraHours) * condition.timeFactor;

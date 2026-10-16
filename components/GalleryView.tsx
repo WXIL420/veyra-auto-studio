@@ -31,7 +31,9 @@ export function GalleryView() {
       <section className="border-b border-line py-16 sm:py-24" aria-labelledby="compare-h">
         <div className="mx-auto grid max-w-7xl gap-10 px-5 sm:px-8 lg:grid-cols-[320px_1fr] lg:gap-16">
           <div>
-            <h2 id="compare-h" className="text-4xl sm:text-5xl">Before &amp; after</h2>
+            <h2 id="compare-h" className="text-4xl sm:text-5xl">
+              Before &amp; after
+            </h2>
             <p className="mt-4 text-silver">Drag the handle or use the arrow keys to compare.</p>
             <div role="group" aria-label="Choose comparison" className="mt-8 flex flex-wrap gap-2 lg:flex-col">
               {comparisons.map((c) => (
@@ -55,7 +57,9 @@ export function GalleryView() {
       <section className="py-16 sm:py-24" aria-labelledby="grid-h">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-            <h2 id="grid-h" className="text-4xl sm:text-5xl">The collection</h2>
+            <h2 id="grid-h" className="text-4xl sm:text-5xl">
+              The collection
+            </h2>
             <div role="group" aria-label="Filter by category" className="flex flex-wrap gap-2">
               {categories.map((c) => (
                 <button
@@ -76,13 +80,20 @@ export function GalleryView() {
           <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {items.map((g, i) => (
               <li key={g.id}>
-                <button type="button" onClick={() => setIndex(i)} className="group relative block w-full overflow-hidden border border-line text-left" aria-label={`Open ${g.title} in lightbox`}>
-                  <span className="block aspect-[4/3] transition-transform duration-500 group-hover:scale-[1.03]">
-                    <Art kind={g.kind} variant={g.variant} label={g.title} />
+                <button
+                  type="button"
+                  onClick={() => setIndex(i)}
+                  className="group relative block w-full overflow-hidden border border-line text-left"
+                  aria-label={`Open ${g.title} in lightbox. ${g.caption}`}
+                >
+                  <span className="block aspect-[4/3] transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100">
+                    <Art kind={g.kind} variant={g.variant} decorative />
                   </span>
                   <span className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 bg-ink/90 p-4">
                     <span>
-                      <span className="block font-display text-xs uppercase tracking-[0.24em] text-copper-2">{g.category}</span>
+                      <span className="block font-display text-xs uppercase tracking-[0.24em] text-copper-2">
+                        {g.category}
+                      </span>
                       <span className="block font-display text-xl uppercase tracking-wide">{g.title}</span>
                     </span>
                     <Expand aria-hidden className="h-5 w-5 shrink-0 text-silver group-hover:text-bone" />
@@ -92,7 +103,8 @@ export function GalleryView() {
             ))}
           </ul>
           <p className="mt-8 border-l-2 border-copper pl-4 text-sm leading-relaxed text-silver">
-            All imagery is original illustrative artwork created for this fictional portfolio project. These are not photographs of real vehicles or completed customer work.
+            All imagery is original illustrative artwork created for this fictional portfolio project. These are not
+            photographs of real vehicles or completed customer work.
           </p>
         </div>
       </section>
@@ -114,20 +126,36 @@ export function GalleryView() {
               <p className="font-display text-sm uppercase tracking-[0.2em] text-silver">
                 {current.category} · {(index ?? 0) + 1}/{items.length}
               </p>
-              <button type="button" autoFocus onClick={() => setIndex(null)} className="grid h-11 w-11 place-items-center hover:text-copper-2" aria-label="Close lightbox">
+              <button
+                type="button"
+                autoFocus
+                onClick={() => setIndex(null)}
+                className="grid h-11 w-11 place-items-center hover:text-copper-2"
+                aria-label="Close lightbox"
+              >
                 <X aria-hidden />
               </button>
             </div>
             <div className="relative min-h-0">
               <div className="mx-auto aspect-[4/3] max-h-[68dvh] bg-ink">
-                <Art kind={current.kind} variant={current.variant} label={current.title} className="!object-contain" />
+                <Art kind={current.kind} variant={current.variant} label={`${current.title}. ${current.caption}`} />
               </div>
               {items.length > 1 && (
                 <>
-                  <button type="button" onClick={() => step(-1)} aria-label="Previous image" className="absolute left-1 top-1/2 grid h-12 w-12 -translate-y-1/2 place-items-center bg-ink/80 hover:bg-copper hover:text-ink sm:-left-6">
+                  <button
+                    type="button"
+                    onClick={() => step(-1)}
+                    aria-label="Previous image"
+                    className="absolute left-1 top-1/2 grid h-12 w-12 -translate-y-1/2 place-items-center bg-ink/80 hover:bg-copper hover:text-ink sm:-left-6"
+                  >
                     <ChevronLeft aria-hidden />
                   </button>
-                  <button type="button" onClick={() => step(1)} aria-label="Next image" className="absolute right-1 top-1/2 grid h-12 w-12 -translate-y-1/2 place-items-center bg-ink/80 hover:bg-copper hover:text-ink sm:-right-6">
+                  <button
+                    type="button"
+                    onClick={() => step(1)}
+                    aria-label="Next image"
+                    className="absolute right-1 top-1/2 grid h-12 w-12 -translate-y-1/2 place-items-center bg-ink/80 hover:bg-copper hover:text-ink sm:-right-6"
+                  >
                     <ChevronRight aria-hidden />
                   </button>
                 </>
