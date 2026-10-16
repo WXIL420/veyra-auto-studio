@@ -6,7 +6,7 @@ import { buttonStyles } from "./ui";
 import { site } from "@/lib/site";
 
 const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-const field = "mt-2 block w-full border bg-ink px-4 py-3 text-bone placeholder:text-silver/60";
+const field = "mt-2 block w-full border bg-ink px-4 py-3 text-bone placeholder:text-silver/75";
 
 export function ContactForm() {
   const [v, setV] = useState({ name: "", email: "", message: "" });
@@ -60,7 +60,7 @@ export function ContactForm() {
           onChange={(e) => setV({ ...v, message: e.target.value })}
           aria-invalid={!!errors.message}
           aria-describedby={errors.message ? "c-message-err" : undefined}
-          className={`${field} ${errors.message ? "border-danger" : "border-line"}`}
+          className={`${field} ${errors.message ? "border-danger" : "border-field"}`}
         />
       ) : (
         <input
@@ -69,7 +69,7 @@ export function ContactForm() {
           onChange={(e) => setV({ ...v, [id]: e.target.value })}
           aria-invalid={!!errors[id]}
           aria-describedby={errors[id] ? `c-${id}-err` : undefined}
-          className={`${field} ${errors[id] ? "border-danger" : "border-line"}`}
+          className={`${field} ${errors[id] ? "border-danger" : "border-field"}`}
           {...props}
         />
       )}

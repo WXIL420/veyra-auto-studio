@@ -5,6 +5,8 @@
   --color-graphite: #191c1e;
   --color-graphite-2: #22262a;
   --color-line: #2c3134;
+  /* Form-field outline: 3:1+ against the near-black page (WCAG 1.4.11). */
+  --color-field: #7a8084;
   --color-bone: #f3f1eb;
   --color-silver: #a8adb0;
   --color-copper: #c87343;

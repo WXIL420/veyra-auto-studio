@@ -70,7 +70,7 @@ function validate(v: Values, today: string): Errors {
   return e;
 }
 
-const inputBase = "block w-full border bg-ink px-4 py-3 text-bone placeholder:text-silver/50 min-h-12";
+const inputBase = "block w-full border bg-ink px-4 py-3 text-bone placeholder:text-silver/75 min-h-12";
 
 function Field({
   id,
@@ -169,7 +169,7 @@ export function BookingForm() {
     "aria-invalid": !!show(k),
     "aria-describedby": show(k) ? `${uid}-${k}-err` : undefined,
   });
-  const cls = (k: keyof Values) => `${inputBase} ${show(k) ? "border-danger" : "border-line"}`;
+  const cls = (k: keyof Values) => `${inputBase} ${show(k) ? "border-danger" : "border-field"}`;
 
   const est = calculate({
     serviceId: v.service || initialService,
@@ -622,7 +622,7 @@ export function BookingForm() {
                 setDragging(false);
                 addFiles(e.dataTransfer.files);
               }}
-              className={`flex cursor-pointer flex-col items-center gap-2 border-2 border-dashed px-6 py-10 text-center transition-colors has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-copper-2 ${dragging ? "border-copper bg-copper/10" : "border-line hover:border-silver"}`}
+              className={`flex cursor-pointer flex-col items-center gap-2 border-2 border-dashed px-6 py-10 text-center transition-colors has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-copper-2 ${dragging ? "border-copper bg-copper/10" : "border-field hover:border-silver"}`}
             >
               <ImagePlus aria-hidden className="h-8 w-8 text-copper-2" strokeWidth={1.4} />
               <span className="font-display text-lg uppercase tracking-wide">Choose photos or drag them here</span>

@@ -164,7 +164,7 @@ export function GalleryView() {
             <div className="pt-4">
               <h3 className="text-2xl sm:text-3xl">{current.title}</h3>
               <p className="mt-2 text-silver">{current.caption}</p>
-              <p className="mt-2 text-xs text-silver/70">Illustrative demo artwork — not a photograph of real work.</p>
+              <p className="mt-2 text-xs text-silver">Illustrative demo artwork — not a photograph of real work.</p>
             </div>
           </div>
         )}
